@@ -41,11 +41,6 @@ function isVoid(posHorizontale:number, posVertical:number, map:Array<Array<numbe
 
 function addPion(posVertical:number, player:number, map:Array<Array<number>>): number {
     for (let posHorizontale = map.length-1; posHorizontale >= 0; posHorizontale--) {
-        /*console.log("addPion : ",isVoid(posHorizontale, posVertical, map),
-        "posHorizontale=",posHorizontale, 
-        " | posVertical=",posVertical, 
-        " | map=",map[posHorizontale][0]);
-        */
         
         if (isVoid(posHorizontale, posVertical, map)) {
             map[posHorizontale][posVertical] = player;
@@ -145,7 +140,7 @@ function isWin(player:number, posHorizontale: number, posVertical: number, map: 
     return map[posHorizontale][posVertical] === player ?  isAlign(posHorizontale, posVertical, map) : false;
 }
 
-function menu() {
+function menu(): void {
     console.log("/-----------------------------------\\");
     console.log(": 1- Joueur contre Joueur.          :");
     console.log(": 2- Joueur contre IA Aléatoire.    :");
@@ -173,8 +168,9 @@ function playerVSplayer(map: Array<Array<number>>): void {
         console.log("Au joueur",player,"de jouer.");
         let posVerticalPion = Number(prompt("Ligne a jouer : "));
         let posHorizontalePion = addPion(posVerticalPion, player, map);
-        if (posVerticalPion === -1) {
-            console.log("Vous n'avez pas donner une position valide, chiffre autorisé de 0 à", map.length-1);
+        console.log(posHorizontalePion, posVerticalPion);
+        if (posHorizontalePion === -1) {
+            console.log("Vous n'avez pas donner une position valide !");
             continue;
         }
         else if (isWin(player, posHorizontalePion, posVerticalPion, map)) {
@@ -204,8 +200,8 @@ function playerVsIARandom(map: Array<Array<number>>): void {
 
 
         posHorizontalePion = addPion(posVerticalPion, player, map);
-        if (posVerticalPion === -1) {
-            console.log("Vous n'avez pas donner une position valide, chiffre autorisé de 0 à", map.length-1);
+        if (posHorizontalePion === -1) {
+            console.log("Vous n'avez pas donner une position valide !");
             continue;
         }
         else if (isWin(player, posHorizontalePion, posVerticalPion, map)) {
@@ -221,7 +217,7 @@ function playerVsIARandom(map: Array<Array<number>>): void {
 }
 
 
-function main() {
+function main(): void {
     console.log("INITIALISATION DU PUISSANCE 4...");
     let map = initializationMaps(Number(prompt("Hauteur du puissance 4 :\n")),Number(prompt("largeur du puissance 4 :\n")));
 
